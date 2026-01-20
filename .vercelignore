@@ -1,13 +1,30 @@
-# Don't upload these to Vercel (they're too large)
+# Don't upload these to Vercel
+# Dockerfile - prevent Vercel from using it
+Dockerfile
+docker-compose.yml
+
+# Large data files
 chunked_data/
 data/processed/
 *.csv
 *.log
+
+# Python cache
 __pycache__/
 *.pyc
+
+# Environment
 .env
 venv/
+
+# Node
 node_modules/
+
+# Frontend (deploy separately)
 frontend/
+
+# Other
 infographics/
 .git/
+*_backup.py
+
