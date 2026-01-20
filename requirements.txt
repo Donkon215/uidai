@@ -1,0 +1,23 @@
+# Core Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# Data Processing
+pandas==2.1.3
+numpy==1.26.2
+
+# Machine Learning (optional for Vercel)
+scikit-learn==1.3.2
+
+# HTTP & Async
+httpx==0.25.2
+python-multipart==0.0.6
+
+# Utilities
+python-dotenv==1.0.0
+psutil==5.9.6
+
+# Monitoring (optional)
+prometheus-client==0.19.0

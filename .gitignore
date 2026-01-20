@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+*.egg-info/
+dist/
+build/
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Large CSV files (use chunked versions in chunked_data/ folder instead)
+processed_aadhaar_risk_data.csv
+governance_intelligence_master.csv
+final_aadhaar_risk_dashboard_data.csv
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+*.log

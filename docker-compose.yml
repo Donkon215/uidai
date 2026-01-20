@@ -1,0 +1,102 @@
+# Pulse of Bharat - Docker Compose Configuration
+# ==============================================
+
+version: '3.8'
+
+services:
+  # Backend API Service
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pulseofbharat-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+      - LOG_LEVEL=INFO
+      - WORKERS=4
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:8000
+      - RATE_LIMIT_ENABLED=True
+      - ML_ENABLED=True
+    volumes:
+      - ./logs:/app/logs
+      - ./chunked_data:/app/chunked_data:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - pulseofbharat-network
+    
+  # Frontend Service (Optional - if using Docker for frontend)
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   container_name: pulseofbharat-frontend
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - REACT_APP_API_URL=http://localhost:8000
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - pulseofbharat-network
+
+  # Redis Cache (Optional - for future use)
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: pulseofbharat-redis
+  #   restart: unless-stopped
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis-data:/data
+  #   networks:
+  #     - pulseofbharat-network
+
+  # PostgreSQL Database (Optional - for future use)
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: pulseofbharat-postgres
+  #   restart: unless-stopped
+  #   environment:
+  #     - POSTGRES_USER=pulseofbharat
+  #     - POSTGRES_PASSWORD=changeme
+  #     - POSTGRES_DB=governance
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres-data:/var/lib/postgresql/data
+  #   networks:
+  #     - pulseofbharat-network
+
+  # Nginx Reverse Proxy (Optional)
+  # nginx:
+  #   image: nginx:alpine
+  #   container_name: pulseofbharat-nginx
+  #   restart: unless-stopped
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+  #     - ./nginx/ssl:/etc/nginx/ssl:ro
+  #   depends_on:
+  #     - backend
+  #     - frontend
+  #   networks:
+  #     - pulseofbharat-network
+
+networks:
+  pulseofbharat-network:
+    driver: bridge
+
+volumes:
+  redis-data:
+  postgres-data:
