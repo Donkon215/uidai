@@ -1,36 +1,40 @@
-# Python
+﻿# Python
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
+*.pyc
 .Python
-.venv/
 venv/
-ENV/
 env/
 *.egg-info/
-dist/
-build/
 
-# Node.js
+# Environment
+.env
+
+# Data files (too large for GitHub)
+*.csv
+chunked_data/
+data/
+api_data_aadhar_biometric/
+api_data_aadhar_demographic/
+api_data_aadhar_enrolment/
+infographics/
+
+# Node
 node_modules/
-npm-debug.log
-yarn-error.log
-
-# Large CSV files (use chunked versions in chunked_data/ folder instead)
-processed_aadhaar_risk_data.csv
-governance_intelligence_master.csv
-final_aadhaar_risk_dashboard_data.csv
+package-lock.json
 
 # IDE
-.idea/
 .vscode/
-*.swp
-*.swo
+.idea/
 
 # OS
 .DS_Store
-Thumbs.db
 
-# Misc
-*.log
+# Build
+frontend/build/
+frontend/dist/
+
+# Vercel
+.vercel/
+
+# Backup
+*_backup.py
